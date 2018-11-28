@@ -3,7 +3,6 @@
 # https://bitbucket.org/m_c_/sample-dash/src/1e2cfabf58ee0493bc5af73260fb2615de42c8d6/app/as_dash.py?at=master&fileviewer=file-view-default
 
 import datetime as dt
-
 import dash
 
 import pandas as pd
@@ -12,11 +11,12 @@ import os
 import colorlover as cl
 import dash_core_components as dcc
 import dash_html_components as html
-# import quandl
+
 import json
 import requests
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=TAYPN59BT91HYQ90'
 from django.conf import settings
+
+url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=api_key'
 
 colorscale = cl.scales['9']['qual']['Paired']
 
@@ -43,9 +43,6 @@ def dispatcher(request):
         except Exception as e:
             response = app.server.make_response(app.server.handle_exception(e))
         return response.get_data()
-
-# this code can be taken from dash sample codes in github
-
 
 def _create_app():
     ''' Creates dash application '''
@@ -88,28 +85,10 @@ def _create_app():
         graphs = []
         for i, ticker in enumerate(tickers):
             try:
-                # df = DataReader(ticker, 'quandl',
-                #                 dt.datetime(2017, 1, 1),
-                #                 dt.datetime.now())
-
-                # type(df)df = quandl.get(
-                #     "AAPL", start_date="2001-12-31", end_date="2005-12-31")
-
-                # alphavantage api ###
                 resp = requests.get(url)
                 data = resp.json()
                 df = pd.DataFrame.from_dict(
-                    data['Time Series (Daily)'], orient='index')
-                # with open('data1.json', 'w') as outfile:
-                #     json.dump(data, outfile)
-
-                # file = 'data1.json'
-                # with open(file) as train_file:
-                #     dict_train = json.load(train_file)
-
-                # # converting json dataset from dictionary to dataframe
-                # df = pd.DataFrame.from_dict(
-                #     dict_train['Time Series (Daily)'], orient='index')
+                    data['Time Series (Daily)'], orient='index')                
             except:
                 graphs.append(html.H3(
                     'Data is not available for {}'.format(ticker),
