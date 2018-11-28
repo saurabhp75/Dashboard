@@ -10,4 +10,4 @@
 ![Home page](https://github.com/saurabhp75/Dashboard/blob/master/images/home.png)
 
 
-**Note : The UI is kept unpolished as it's a POC**
+**Note : The UI is unpolished as it's a POC**
