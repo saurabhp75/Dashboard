@@ -1,6 +1,6 @@
 **Dashboard with following components :**
 
-**1. NASDAQ stock ticker.**
+**1. NASDAQ stock ticker (interactive).**
 
 ![NASDAQ ticker](https://github.com/saurabhp75/Dashboard/blob/master/images/stock_ticker.png)
 
